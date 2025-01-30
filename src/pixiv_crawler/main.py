@@ -37,6 +37,18 @@ def load_config() -> Dict:
         'LOG_LEVEL': 'INFO'
     }
 
+def show_help():
+    """显示帮助信息"""
+    print("\n使用方法:")
+    print("1. 下载小说：直接输入小说ID")
+    print("2. 合并系列：输入 merge 系列目录名")
+    print("3. 退出程序：输入 q 或 quit")
+    print("\n示例:")
+    print("- 下载小说：23792182")
+    print("- 合并系列：merge 邂逅少女与禁忌欲望")
+    print("- 显示帮助：help")
+    print("- 退出程序：q")
+
 def main():
     """主程序入口"""
     # 加载配置
@@ -52,13 +64,42 @@ def main():
         # 创建爬虫实例
         crawler = PixivNovelCrawler(config)
         
+        print("\n欢迎使用 Pixiv 小说下载器！输入 help 获取帮助。")
+        
         while True:
-            novel_id = input("\n请输入Pixiv小说ID（输入q退出）: ").strip()
-            if novel_id.lower() == 'q':
-                break
+            cmd = input("\n请输入命令: ").strip()
             
-            crawler.crawl_novel(novel_id)
-            print("\n" + "="*50)
+            if cmd.lower() in ('q', 'quit'):
+                break
+            elif cmd.lower() == 'help':
+                show_help()
+            elif cmd.lower().startswith('merge '):
+                # 合并系列小说
+                series_name = cmd[6:].strip()
+                if not series_name:
+                    print("请指定系列名称！")
+                    continue
+                
+                series_dir = os.path.join(config['DOWNLOAD_PATH'], series_name)
+                if not os.path.exists(series_dir):
+                    print(f"系列目录不存在: {series_dir}")
+                    continue
+                
+                print(f"\n开始合并系列：{series_name}")
+                output_file = utils.merge_series(series_dir)
+                if output_file:
+                    print(f"合并完成！文件已保存至: {output_file}")
+                else:
+                    print("合并失败！")
+            else:
+                # 下载小说
+                novel_id = cmd
+                if not novel_id.isdigit():
+                    print("无效的小说ID！")
+                    continue
+                
+                crawler.crawl_novel(novel_id)
+                print("\n" + "="*50)
             
     except KeyboardInterrupt:
         print("\n程序已终止")
