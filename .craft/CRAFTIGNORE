@@ -1,0 +1,8 @@
+.craft
+.evercraft
+.DS_Store
+~$*
+*.dwl
+*.dwl2
+*.bak
+*.log

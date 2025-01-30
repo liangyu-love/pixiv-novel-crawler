@@ -1,0 +1,30 @@
+# Pixiv 小说爬虫
+
+这是一个用于爬取 Pixiv 小说的工具，可以：
+- 爬取小说标题和内容
+- 支持系列小说的批量爬取
+- 将同系列小说保存在同一文件夹中
+
+## 使用要求
+- Python 3.7+
+- Chrome 浏览器
+- Pixiv 账号
+
+## 安装
+1. 克隆本仓库
+2. 安装依赖：
+```bash
+pip install -r requirements.txt
+```
+
+## 使用方法
+1. 在 `config.py` 中配置你的 Pixiv 账号信息
+2. 运行爬虫：
+```bash
+python pixiv_novel_crawler.py
+```
+
+## 注意事项
+- 请遵守 Pixiv 的使用条款
+- 爬取的内容仅供个人使用
+- 建议设置适当的爬取间隔，避免对服务器造成压力 

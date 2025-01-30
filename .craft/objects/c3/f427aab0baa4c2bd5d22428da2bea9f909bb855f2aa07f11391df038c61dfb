@@ -1,0 +1,15 @@
+# Pixiv账号配置
+USERNAME = "jiangxiyue"  # Pixiv 用户名
+PASSWORD = "guo20051006"  # Pixiv 密码
+
+# Pixiv Cookie配置
+# 从浏览器中复制的 cookie 字符串
+COOKIE = "first_visit_datetime_pc=2025-01-29%2011%3A20%3A03; yuid_b=KFA3BlE; p_ab_id=9; p_ab_id_2=3; p_ab_d_id=1407155918; _gid=GA1.2.870369368.1738117208; device_token=5f80c88323a6e0a5426db76165670565; privacy_policy_agreement=7; c_type=20; privacy_policy_notification=0; a_type=0; b_type=0; cc1=2025-01-30%2016%3A35%3A15; cf_clearance=fgFkShftmkOYwKfSXMLoMaCJP8vi8pan4AOCyQOhbkk-1738222656-1.2.1.1-YAyBmxEvuPIsn7KoHWa7MKb6XwY4QR7_occKIoUEAxmRYkq7iJrUU7W8qIjHo6Blfc23pOIIY2AampjhphuOBz7ZavR91k9XikPLLKfKBVPu.74hthW99CWRdCXylIJHX3cgTrsU1g5E1H9XEiUtWqsvsUdxuBnJLPN6twCS6HR57WOTdPsb0l0Ktb_t5cOpS9FjLG_UHBW3JMyaEgNO9uE52gTYH4ZR8bufZp2daYNBeV0JPu0ONDgYGRdSKcWaAEMLOilOos.3eCKqbtayUTp42UZlbaEWa6aBLwTijfU; PHPSESSID=102080086_e4CsWwT6AKSyetpHWBv71n9aLfAhml4N; _ga_MZ1NL4PHH0=GS1.1.1738222655.3.1.1738222673.0.0.0; _ga=GA1.2.1353046438.1738117208; _ga_75BBYNYN9J=GS1.1.1738221875.3.1.1738223168.0.0.0"
+
+# 爬虫配置
+DOWNLOAD_PATH = "novels"  # 下载文件保存路径
+SLEEP_TIME = 2  # 每次请求间隔时间（秒）
+MAX_RETRIES = 3  # 最大重试次数
+
+# 浏览器配置
+HEADLESS = False  # 是否使用无头模式 
