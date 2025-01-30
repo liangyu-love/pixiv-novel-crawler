@@ -41,11 +41,12 @@ def show_help():
     """显示帮助信息"""
     print("\n使用方法:")
     print("1. 下载小说：直接输入小说ID")
-    print("2. 合并系列：输入 merge 系列目录名")
+    print("2. 合并系列：merge 系列目录名 [输出文件名]")
     print("3. 退出程序：输入 q 或 quit")
     print("\n示例:")
     print("- 下载小说：23792182")
     print("- 合并系列：merge 邂逅少女与禁忌欲望")
+    print("- 指定输出：merge 邂逅少女与禁忌欲望 全本.txt")
     print("- 显示帮助：help")
     print("- 退出程序：q")
 
@@ -75,10 +76,13 @@ def main():
                 show_help()
             elif cmd.lower().startswith('merge '):
                 # 合并系列小说
-                series_name = cmd[6:].strip()
-                if not series_name:
+                parts = cmd[6:].strip().split(maxsplit=1)
+                if not parts:
                     print("请指定系列名称！")
                     continue
+                
+                series_name = parts[0]
+                output_filename = parts[1] if len(parts) > 1 else None
                 
                 series_dir = os.path.join(config['DOWNLOAD_PATH'], series_name)
                 if not os.path.exists(series_dir):
@@ -86,7 +90,10 @@ def main():
                     continue
                 
                 print(f"\n开始合并系列：{series_name}")
-                output_file = utils.merge_series(series_dir)
+                if output_filename:
+                    print(f"指定输出文件名：{output_filename}")
+                
+                output_file = utils.merge_series(series_dir, output_filename)
                 if output_file:
                     print(f"合并完成！文件已保存至: {output_file}")
                 else:

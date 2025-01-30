@@ -94,17 +94,32 @@ def merge_series(series_dir: str, output_filename: Optional[str] = None) -> Opti
                     if len(parts) >= 2:
                         metadata = parts[0].strip()
                         novel_content = parts[1].strip()
-                        # 提取章节序号（如果有）
-                        order = 0
+                        
+                        # 提取章节序号的不同方式
+                        order = float('inf')  # 默认放到最后
+                        
+                        # 1. 从标题中提取数字章节号
                         title_match = re.search(r'标题：.*?第(\d+)章', metadata)
                         if title_match:
                             order = int(title_match.group(1))
+                        else:
+                            # 2. 从文件名中提取数字
+                            num_match = re.search(r'(\d+)', filename)
+                            if num_match:
+                                order = int(num_match.group(1))
+                            else:
+                                # 3. 从链接ID中提取数字作为时间顺序
+                                id_match = re.search(r'id=(\d+)', metadata)
+                                if id_match:
+                                    order = int(id_match.group(1))
+                        
                         novels.append({
                             'order': order,
                             'filename': filename,
                             'metadata': metadata,
                             'content': novel_content
                         })
+                        logging.info(f"读取文件 {filename} 成功，排序值: {order}")
             except Exception as e:
                 logging.warning(f"读取文件失败 {filename}: {str(e)}")
                 continue
